@@ -56,7 +56,7 @@ public class Feladat {
     public List<Double> szazalekHozzaad(List<Modell> termekek, double szazalek){
         List<Double> eredmeny = new ArrayList<>();
         for (Modell m : termekek){
-            eredmeny.add( ((m.getAr()/100)*szazalek));
+            eredmeny.add( m.getAr() * (1 + szazalek/100) );
         }
         return eredmeny;
     }
