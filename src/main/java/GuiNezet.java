@@ -7,7 +7,6 @@ import java.util.Set;
 
 public class GuiNezet extends JFrame {
 
-
     private Feladat kontroller;
     private List<Modell> termekek;
 
