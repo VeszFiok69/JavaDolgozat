@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.Set;
 
@@ -8,7 +10,6 @@ public class GuiNezet extends JFrame {
 
     private Feladat kontroller;
     private List<Modell> termekek;
-
 
     private JButton btnBeolvas, btnLegdragabb, btnLegolcsobb, btnTermekkod, btnSzazalekosNoveles;
     private DefaultListModel<String> dlm;
@@ -19,7 +20,14 @@ public class GuiNezet extends JFrame {
 
         setTitle("Termékkezelő");
         setSize(600, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                kilepes();
+            }
+        });
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
@@ -40,6 +48,8 @@ public class GuiNezet extends JFrame {
         dlm = new DefaultListModel<>();
         lstEredmenyek = new JList<>(dlm);
     }
+
+
 
     private void layoutBeallitas() {
 
@@ -150,8 +160,14 @@ public class GuiNezet extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-
-        SwingUtilities.invokeLater(() -> new GuiNezet().setVisible(true));
+    private void kilepes() {
+        String m = "Biztos kilépsz?";
+        String c = "KILÉPÉS";
+        int t = JOptionPane.YES_NO_OPTION;
+        int v = JOptionPane.showConfirmDialog(this,m,c,t);
+        if(v == JOptionPane.YES_OPTION) {
+            System.exit(0);
+        }
     }
+
 }
